@@ -85,3 +85,47 @@ first rewrite
   vagrant@server1:~$ docker ps
 CONTAINER ID   IMAGE     COMMAND   CREATED   STATUS    PORTS     NAMES
   ```
+#Жизненный цикл Docker-контейнера 
+
+  1. https://hub.docker.com/r/borusman/devops-netology/tags
+  2. Вариант использования виртуализации:
+  
+    a. высоконагруженное монолитное Java веб-приложение: виртуальная машина, так как требуется выделение ресурсов и сложная настройка окружения
+    b. Nodejs веб-приложение: возможен вариант использования docker, не требуется тяжелых ресурсов, легко масщтабировать при помощи docker контейнеров 
+    c. мобильное приложение c версиями для Android и iOS: требуется эмулятор мобильных приложений, лучше использовать виртуальную/физическую машину
+    d. шина данных на базе Apache Kafka: необходима работа приложения в кластере, подходит вариант использования на виртуальных машинах. Но так же возможен вариант и с запуском в docker(docker-compose), проблема запуска в докер - сложно администрировать кафку в таком случае
+    e. Elasticsearch-кластер для реализации логирования продуктивного веб-приложения — три ноды elasticsearch, два logstash и две ноды kibana: запуск через докер, оптимальное решение, после запуска не требуется вмешательств в логику работы,легко разварачивать и поддерживать такую инфраструктур в докере
+    f. мониторинг-стек на базе Prometheus и Grafana: легкий и быстрый запуск в докере
+    g. MongoDB как основное хранилище данных для Java-приложения: в зависимости от нагрузки, для тяжелых приложений рекомендовано использовать ВМ, т.к. легче выделять ресурсы. Для  легковесных приложений оптимален вариант и с docker.
+    h. Gitlab-сервер для реализации CI/CD-процессов и приватный (закрытый) Docker Registry: могут быть развернуты как Docker-контейнеры,
+
+  3. 
+      ## Получение образа и запуск контейнера
+      ```sh
+      docker pull centos && docker run -d centos -v ./data:/data
+      docker pull debian && docker run -d debian -v ./data:/data
+      ```
+      ## Добавление файла в интерактивном режиме для контейнера centos
+      ```sh
+      docker exec -it container_id sh
+      cd /data
+      echo "Hello" > hello.txt
+      exit
+      ```
+      ## Добавление файла на хостовой машине
+      ```sh
+      cd /opt/data
+      echo "Hello from host machine" > host.txt
+      ```
+      ## Отображение файлов для debian
+      ```sh
+      ls -la /data/
+      # ls -la
+      total 16
+      drwxr-xr-x 2 root root 4096 Aug 28 20:14 .
+      drwxr-xr-x 1 root root 4096 Aug 28 20:12 ..
+      -rw-r--r-- 1 root root    6 Aug 28 20:13 hello.txt
+      -rw-r--r-- 1 root root   24 Aug 28 20:14 host.txt
+      ```
+4. https://hub.docker.com/layers/borusman/netology-ansible/1.2/images/sha256-05962d8e33186668a0e3049658ca6483471a758ec49d78f8390fa395c18257bc?context=repo
+ по выполнению возникла проблема совеместимости пакетов, пришлось добавить  pip3 install --ignore-installed mitogen ansible-lint jmespath && 
