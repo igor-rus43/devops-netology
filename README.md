@@ -2,7 +2,7 @@
 '''sh
   packer init config.pkr.hcl
   packer build debian.json
-'''sh
+'''
 
 2. Создание ВМ с помощью terraform
 ![Свойста созданной вм через terraform](yandex_terraform.png)
@@ -11,7 +11,7 @@
   terraform validate
   terraform plan
   terraform apply
-'''sh
+'''
 
 terraform apply:
 '''sh
@@ -134,7 +134,7 @@ Outputs:
 
 external_ip_address_node01_yandex_cloud = "84.201.135.170"
 internal_ip_address_node01_yandex_cloud = "192.168.101.16"
-'''sh
+'''
 
 3. Запуск grafana+prometheus при помощи docker
 
@@ -145,7 +145,7 @@ internal_ip_address_node01_yandex_cloud = "192.168.101.16"
   grafana         /run.sh                          Up      0.0.0.0:3000->3000/tcp
   node-exporter   /bin/node_exporter --path. ...   Up      0.0.0.0:9100->9100/tcp
   prometheus      /bin/prometheus --config.f ...   Up      0.0.0.0:9090->9090/tcp
-'''sh
+'''
 
 4. и 5. 
 ![node-1](grafana.png)
