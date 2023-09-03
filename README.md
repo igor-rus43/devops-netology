@@ -21,7 +21,6 @@ Terraform used the selected providers to generate the following execution plan. 
 
 Terraform will perform the following actions:
 
-  # yandex_compute_instance.node01 will be created
   + resource "yandex_compute_instance" "node01" {
       + allow_stopping_for_update = true
       + created_at                = (known after apply)
@@ -80,7 +79,6 @@ Terraform will perform the following actions:
         }
     }
 
-  # yandex_vpc_network.net_terraform will be created
   + resource "yandex_vpc_network" "net_terraform" {
       + created_at                = (known after apply)
       + default_security_group_id = (known after apply)
@@ -91,7 +89,6 @@ Terraform will perform the following actions:
       + subnet_ids                = (known after apply)
     }
 
-  # yandex_vpc_subnet.subnet_terraform will be created
   + resource "yandex_vpc_subnet" "subnet_terraform" {
       + created_at     = (known after apply)
       + folder_id      = (known after apply)
