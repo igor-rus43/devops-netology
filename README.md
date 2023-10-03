@@ -1,153 +1,30 @@
-1. Сощздание образа при помощи pcaker:
-```sh
-  packer init config.pkr.hcl
-  packer build debian.json
-```
 
-2. Создание ВМ с помощью terraform
-![Свойста созданной вм через terraform](yandex_terraform.png)
-```sh
-  terraform init
-  terraform validate
-  terraform plan
-  terraform apply
-``
+1.
+2. В файле personal.auto.tfvars
+3.  "result": "w8kN4UFBcRVe8Stn
+4. 
+5. Исправленный код:
+resource "docker_image" "nginx" {
+  name         = "nginx:latest"
+  keep_locally = true
+}
 
-terraform apply:
-```sh
+resource "docker_container" "nginx" {
+  image = docker_image.nginx.image_id
+  name  = "nginx"
 
-Terraform used the selected providers to generate the following execution plan. Resource actions are indicated with the following symbols:
-  + create
+![Вывод docker ps](docker_ps.png)
+6. ![Вывод docker ps исправления](docker_ps2.png)
 
-Terraform will perform the following actions:
+7.
+{
+  "version": 4,
+  "terraform_version": "1.5.7",
+  "serial": 21,
+  "lineage": "eec39a4f-cedf-cea2-1a2f-ef16171490fc",
+  "outputs": {},
+  "resources": [],
+  "check_results": null
+}
 
-  + resource "yandex_compute_instance" "node01" {
-      + allow_stopping_for_update = true
-      + created_at                = (known after apply)
-      + folder_id                 = (known after apply)
-      + fqdn                      = (known after apply)
-      + gpu_cluster_id            = (known after apply)
-      + hostname                  = "node01.netology.cloud"
-      + id                        = (known after apply)
-      + metadata                  = {
-          + "ssh-keys" = <<-EOT
-                centos:ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQC24/bv7QFpJg40ulAjzoqINFOPqWAkvvx5fOx6j6CWXTgO++yx5fhx4tOoVOQik3qgHwEl8vVgw5RyjMaeswKKLuyVCSU1XQOOtwvDiRXy6C3jsz8rY4YlHRqupLIb45hYd9wcEzLQgegsXti69SQXAvJtjNiWcYXxOXRKHJbAcA9T1EWKGnHFLjSispbzBvo5Uzfy9fPZZJYD0iQchOLVox078Bym+GbFqbkGr1IrX+23U5b6RV5AI/pDLaUXlQtqySmeh0ohJ4kEJljQDZ2R/+roYxUQl2692VL7/w983s30mpOUDeJCRRgc/J+zsn72gVW/6VK2K0BtJnQmj0vusyRUVy5LrDtaJuh4klQ/WZQ7HrXCR4ZDtLG3ncaCLziDDc15MeuAqjHSJakjwVPiw3614/pxHQY8maPD3cQmM6Bpbzl/KFBJ8eLFYdzURp0z8DKHrMvUJmfcEtqICUq440vdpU5UeS6Y7uyyrspeS2HADpZ06coeBWXibzZMxYs= root@netology-test
-            EOT
-        }
-      + name                      = "node01"
-      + network_acceleration_type = "standard"
-      + platform_id               = "standard-v1"
-      + service_account_id        = (known after apply)
-      + status                    = (known after apply)
-      + zone                      = "ru-central1-a"
-
-      + boot_disk {
-          + auto_delete = true
-          + device_name = (known after apply)
-          + disk_id     = (known after apply)
-          + mode        = (known after apply)
-
-          + initialize_params {
-              + block_size  = (known after apply)
-              + description = (known after apply)
-              + image_id    = "fd886si0pmsjeag34enq"
-              + name        = "root-node01"
-              + size        = 50
-              + snapshot_id = (known after apply)
-              + type        = "network-nvme"
-            }
-        }
-
-      + network_interface {
-          + index              = (known after apply)
-          + ip_address         = (known after apply)
-          + ipv4               = true
-          + ipv6               = (known after apply)
-          + ipv6_address       = (known after apply)
-          + mac_address        = (known after apply)
-          + nat                = true
-          + nat_ip_address     = (known after apply)
-          + nat_ip_version     = (known after apply)
-          + security_group_ids = (known after apply)
-          + subnet_id          = (known after apply)
-        }
-
-      + resources {
-          + core_fraction = 100
-          + cores         = 8
-          + memory        = 8
-        }
-    }
-
-  + resource "yandex_vpc_network" "net_terraform" {
-      + created_at                = (known after apply)
-      + default_security_group_id = (known after apply)
-      + folder_id                 = (known after apply)
-      + id                        = (known after apply)
-      + labels                    = (known after apply)
-      + name                      = "net_terraform"
-      + subnet_ids                = (known after apply)
-    }
-
-  + resource "yandex_vpc_subnet" "subnet_terraform" {
-      + created_at     = (known after apply)
-      + folder_id      = (known after apply)
-      + id             = (known after apply)
-      + labels         = (known after apply)
-      + name           = "subnet_terraform"
-      + network_id     = (known after apply)
-      + v4_cidr_blocks = [
-          + "192.168.101.0/24",
-        ]
-      + v6_cidr_blocks = (known after apply)
-      + zone           = "ru-central1-a"
-    }
-
-Plan: 3 to add, 0 to change, 0 to destroy.
-
-Changes to Outputs:
-  + external_ip_address_node01_yandex_cloud = (known after apply)
-  + internal_ip_address_node01_yandex_cloud = (known after apply)
-
-Do you want to perform these actions?
-  Terraform will perform the actions described above.
-  Only 'yes' will be accepted to approve.
-
-  Enter a value: yes
-
-yandex_vpc_network.net_terraform: Creating...
-yandex_vpc_network.net_terraform: Creation complete after 1s [id=enptajsgap005ukos0oq]
-yandex_vpc_subnet.subnet_terraform: Creating...
-yandex_vpc_subnet.subnet_terraform: Creation complete after 0s [id=e9borbikerbiece2t39a]
-yandex_compute_instance.node01: Creating...
-yandex_compute_instance.node01: Still creating... [10s elapsed]
-yandex_compute_instance.node01: Still creating... [20s elapsed]
-yandex_compute_instance.node01: Still creating... [30s elapsed]
-yandex_compute_instance.node01: Still creating... [40s elapsed]
-yandex_compute_instance.node01: Still creating... [50s elapsed]
-yandex_compute_instance.node01: Still creating... [1m0s elapsed]
-yandex_compute_instance.node01: Creation complete after 1m1s [id=fhmba84jucj6ju969toh]
-
-Apply complete! Resources: 3 added, 0 changed, 0 destroyed.
-
-Outputs:
-
-external_ip_address_node01_yandex_cloud = "84.201.135.170"
-internal_ip_address_node01_yandex_cloud = "192.168.101.16"
-```
-
-3. Запуск grafana+prometheus при помощи docker
-
-```sh
-  [root@node01 monitoring]# docker-compose ps
-      Name                   Command               State           Ports
-  -------------------------------------------------------------------------------
-  grafana         /run.sh                          Up      0.0.0.0:3000->3000/tcp
-  node-exporter   /bin/node_exporter --path. ...   Up      0.0.0.0:9100->9100/tcp
-  prometheus      /bin/prometheus --config.f ...   Up      0.0.0.0:9090->9090/tcp
-```
-
-4. и 5. 
-![node-1](grafana.png)
-
-![node-2](grafana_2.png)
+8. docker-image не будет удален из-за опции keep_locally:true . При значении true образ при выполнении terraform destroy не будет удален, в значении false - удаляется
