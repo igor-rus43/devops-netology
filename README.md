@@ -13,8 +13,8 @@ resource "docker_container" "nginx" {
   image = docker_image.nginx.image_id
   name  = "nginx"
 ```
-<image src="docker_ps.png" alt="docker ps">
-6. <image src="docker_ps2.png" alt="docker ps">
+![Вывод docker ps](docker_ps.png "docker ps")
+6. ![Вывод docker ps исправления](docker_ps2.png "docker ps")
 
 Опасность применения ключа -auto-approve заключается в том, что при его указании отключаются проверки и подтвердения (yes or no). С использованием этого ключа будут применены все настройки автоматически, из-за чего смогут всплыть какие-то скрытые ошибки
 7.
