@@ -1,9 +1,8 @@
 
-1.
-2. В файле personal.auto.tfvars
+1. Каталог скопирован
+2. personal.auto.tfvars
 3.  "result": "w8kN4UFBcRVe8Stn
-4. 
-5. Исправленный код:
+4-5. Исправленный код:
 ```
 resource "docker_image" "nginx" {
   name         = "nginx:latest"
@@ -14,9 +13,10 @@ resource "docker_container" "nginx" {
   image = docker_image.nginx.image_id
   name  = "nginx"
 ```
-![Вывод docker ps](docker_ps.png)
-6. ![Вывод docker ps исправления](docker_ps2.png)
+<image src="docker_ps.png" alt="docker ps">
+6. <image src="docker_ps2.png" alt="docker ps">
 
+Опасность применения ключа -auto-approve заключается в том, что при его указании отключаются проверки и подтвердения (yes or no). С использованием этого ключа будут применены все настройки автоматически, из-за чего смогут всплыть какие-то скрытые ошибки
 7.
 ```
 {
