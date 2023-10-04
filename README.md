@@ -1,7 +1,7 @@
 
 1. Каталог скопирован
 2. personal.auto.tfvars
-3.  "result": "w8kN4UFBcRVe8Stn"
+3.  "result": "w8kN4UFBcRVe8Stn"  
 4-5. Исправленный код:  
 ```
 resource "docker_image" "nginx" {
